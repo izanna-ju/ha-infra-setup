@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "web_bucket" {
-  bucket_prefix = "izanna-web-bucket"
+  bucket = "izanna-web-bucket"
   force_destroy = true
 }
 
