@@ -1,7 +1,9 @@
 #!/bin/bash
 
 apt-get update -y
-apt-get install unzip awscli -y
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
 apt-get install apache2 -y                    
 systemctl start apache2.service
 cd /var/www/html
