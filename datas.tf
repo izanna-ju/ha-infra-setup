@@ -17,3 +17,8 @@ data "aws_ami" "ubuntu" {
 data "aws_availability_zones" "available" {
   state = "available"
 }
+
+data "http" "my_public_ip" {
+  url = "https://ipv4.icanhazip.com"
+}
+
