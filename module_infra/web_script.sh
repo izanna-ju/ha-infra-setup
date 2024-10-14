@@ -22,5 +22,5 @@ aws s3 cp s3://izanna-web-bucket/sample_index.html .
 
 cp sample_index.html index.html
 
-# Restart Apache
+# Restart Apache    
 systemctl restart apache2.service
