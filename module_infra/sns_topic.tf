@@ -20,5 +20,5 @@ resource "aws_autoscaling_notification" "asg_notifications" {
     "autoscaling:EC2_INSTANCE_LAUNCH_ERROR",
     "autoscaling:EC2_INSTANCE_TERMINATE_ERROR",
   ]
-  topic_arn = aws_sns_topic.asg_sns_topic.arn 
+  topic_arn = aws_sns_topic.asg_sns_topic.arn
 }
