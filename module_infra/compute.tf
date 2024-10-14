@@ -192,25 +192,7 @@ resource "aws_autoscaling_group" "dev_autoscaling_group" {
 
     triggers = ["desired_capacity"]
   }
-  # tags = {
-  #   key                 = "Owners"
-  #   value               = "Dev-Team"
-  #   propagate_at_launch = true
-  # }
-}
 
-resource "aws_autoscaling_policy" "asg_cpu_policy" {
-  name                      = "asg-cpu-policy"
-  policy_type               = "TargetTrackingScaling" # Scale if avg cpu usage exceeds 50% 
-  autoscaling_group_name    = aws_autoscaling_group.dev_autoscaling_group.id
-  estimated_instance_warmup = 180
-  # CPU Utilization is above 50
-  target_tracking_configuration {
-    predefined_metric_specification {
-      predefined_metric_type = "ASGAverageCPUUtilization"
-    }
-    target_value = 50.0
-  }
 }
 
 resource "aws_lb" "load_balancer" {
