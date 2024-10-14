@@ -101,6 +101,7 @@ resource "aws_key_pair" "bastion_auth" {
   public_key = file("~/.ssh/jump_box_ed25519.pub")
 }
 
+# Launch Template 
 resource "aws_launch_template" "instance_launch_template" {
   name                   = "instance-launch-template"
   description            = "Launch Instance template"
@@ -166,6 +167,7 @@ resource "aws_instance" "bastion_host" {
   security_groups             = [aws_security_group.bastion_host_sg.id]
 }
 
+# Autoscaling group for instance
 resource "aws_autoscaling_group" "dev_autoscaling_group" {
   name_prefix               = "mydevasg-"
   desired_capacity          = 2
