@@ -210,7 +210,8 @@ resource "aws_autoscaling_policy" "asg_cpu_policy" {
       predefined_metric_type = "ASGAverageCPUUtilization"
     }
     target_value = 50.0
-  } 
+  }
+} 
 
 resource "aws_lb" "load_balancer" {
   name               = "dev-application-lb"
