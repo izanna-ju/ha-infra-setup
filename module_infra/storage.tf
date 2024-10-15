@@ -24,10 +24,9 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_crypto_con
 }
 
 resource "aws_s3_object" "izanna_upload_object" {
-  for_each               = fileset("${var.object_path}/", "**")
   bucket                 = aws_s3_bucket.web_bucket.id
-  key                    = each.value
-  source                 = "${var.object_path}/${each.value}"
+  key                    = "barista_cafe_web"
+  source                 = "./barista_cafe_web.zip"
   server_side_encryption = "AES256"
 
   tags = {

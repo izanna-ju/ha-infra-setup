@@ -19,8 +19,3 @@ variable "environment_name" {
 variable "bucket_name" {
   type = string
 }
-
-variable "object_path" {
-  description = "path of folder to upload"
-  default     = "./barista_cafe"
-}

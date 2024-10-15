@@ -24,11 +24,6 @@ variable "endpoint" {
   sensitive = true 
 }
 
-# variable "path" {
-#   description = "folder path of web content"
-#   default = "./barista_cafe"
-# }
-
 module "infrastructure_instance" {
   source = "../module_infra"
 
