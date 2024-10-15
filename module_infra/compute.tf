@@ -101,7 +101,7 @@ resource "aws_key_pair" "bastion_auth" {
   public_key = file("~/.ssh/jump_box_ed25519.pub")
 }
 
-# Launch Template 
+# set up launch template 
 resource "aws_launch_template" "instance_launch_template" {
   name                   = "instance-launch-template"
   description            = "Launch Instance template"
@@ -151,8 +151,12 @@ resource "aws_launch_template" "instance_launch_template" {
     http_put_response_hop_limit = 1
   }
 
+  tag_specifications {
+    resource_type = "instance" 
+  }
+
   tags = {
-    Name = "${var.environment_name}-launch-template"
+    Name = "${var.environment_name}-Instance"
     Project     = "Instance-setup"
   }
 }
