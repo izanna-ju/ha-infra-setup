@@ -152,7 +152,7 @@ resource "aws_launch_template" "instance_launch_template" {
   }
 
   tags = {
-    Environment = "${var.environment_name}-launch-template"
+    Name = "${var.environment_name}-launch-template"
     Project     = "Instance-setup"
   }
 }
