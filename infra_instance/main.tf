@@ -11,12 +11,17 @@ terraform {
   }
 }
 
+provider "aws" {
+  region = "us-east-1"
+}
+
 locals {
   environment_name = terraform.workspace
 }
 
-provider "aws" {
-  region = "us-east-1"
+variable "endpoint" {
+  type = string 
+  sensitive = true 
 }
 
 module "infrastructure_instance" {
@@ -25,5 +30,6 @@ module "infrastructure_instance" {
   # input variables
   bucket_name      = "izanna-web-bucket"
   environment_name = local.environment_name
+  region = var.region
 }
 
