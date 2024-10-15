@@ -108,7 +108,7 @@ resource "aws_launch_template" "instance_launch_template" {
   update_default_version = true
   vpc_security_group_ids = [aws_security_group.web_server_sg.id]
   image_id               = data.aws_ami.ubuntu.id
-  instance_type          = var.instance_type
+  instance_type          = terraform.workspace = "production" ? var.instance_type : "t3.micro"
   ebs_optimized          = true
   key_name               = aws_key_pair.infra_auth.id
   user_data              = filebase64("./web_script.sh")
