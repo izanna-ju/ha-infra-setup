@@ -1,8 +1,4 @@
 terraform {
-  backend "s3" {
-    key = "infra/infra-setup/terraform.tfstate"
-  }
-
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -11,7 +7,4 @@ terraform {
   }
 }
 
-provider "aws" {
-  profile = "iamadmin-general"
-}
 
