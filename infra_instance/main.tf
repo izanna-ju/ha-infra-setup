@@ -30,6 +30,7 @@ module "infrastructure_instance" {
   # input variables
   bucket_name      = "izanna-web-bucket"
   environment_name = local.environment_name
-  region = var.region
+  endpoint = var.endpoint
+  region = "us-east-1"
 }
 
