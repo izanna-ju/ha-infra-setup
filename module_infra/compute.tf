@@ -4,7 +4,7 @@ resource "aws_security_group" "web_server_sg" {
   vpc_id      = aws_vpc.infra_vpc.id
 
   tags = {
-    Name = "dev-sg"
+    Name = "${var.environment_name}-dev-sg"
   }
 }
 
@@ -69,7 +69,7 @@ resource "aws_security_group" "load_balancer_sg" {
   vpc_id      = aws_vpc.infra_vpc.id
 
   tags = {
-    Name = "load-balancer-sg"
+    Name = "${var.environment_name}-load-balancer-sg"
   }
 }
 
@@ -108,7 +108,7 @@ resource "aws_launch_template" "instance_launch_template" {
   update_default_version = true
   vpc_security_group_ids = [aws_security_group.web_server_sg.id]
   image_id               = data.aws_ami.ubuntu.id
-  instance_type          = terraform.workspace = "production" ? var.instance_type : "t3.micro"
+  instance_type          = var.environment_name = "production" ? var.instance_type : "t3.micro"
   ebs_optimized          = true
   key_name               = aws_key_pair.infra_auth.id
   user_data              = filebase64("./web_script.sh")
@@ -152,8 +152,8 @@ resource "aws_launch_template" "instance_launch_template" {
   }
 
   tags = {
-    Environment = "dev"
-    Project     = "megasecret"
+    Environment = "${var.environment_name}-launch-template"
+    Project     = "Instance-setup"
   }
 }
 

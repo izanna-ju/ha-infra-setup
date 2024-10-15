@@ -11,3 +11,7 @@ variable "instance_type" {
 variable "endpoint" {
   type = string
 }
+
+variable "environment_name" {
+  type = string
+}
