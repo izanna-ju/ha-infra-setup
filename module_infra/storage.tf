@@ -1,3 +1,7 @@
+# locals {
+#   files = [for f in fileset(var.object_path, "**/*") : f if !is_dir("${var.object_path}/${f}")]
+# }
+
 resource "aws_s3_bucket" "web_bucket" {
   bucket        = var.bucket_name
   force_destroy = true
@@ -20,9 +24,10 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_crypto_con
 }
 
 resource "aws_s3_object" "izanna_upload_object" {
+  for_each               = fileset("${var.object_path}/", "**")
   bucket                 = aws_s3_bucket.web_bucket.id
-  key                    = "sample_index.html"
-  source                 = "./sample_index.html"
+  key                    = each.value
+  source                 = "${var.object_path}/${each.value}"
   server_side_encryption = "AES256"
 
   tags = {

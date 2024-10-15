@@ -152,12 +152,12 @@ resource "aws_launch_template" "instance_launch_template" {
   }
 
   tag_specifications {
-    resource_type = "instance" 
+    resource_type = "instance"
 
     tags = {
       Name = "${var.environment_name}-Instance"
     }
-}
+  }
 }
 
 resource "aws_instance" "bastion_host" {

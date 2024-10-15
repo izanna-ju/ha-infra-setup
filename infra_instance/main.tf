@@ -24,6 +24,11 @@ variable "endpoint" {
   sensitive = true 
 }
 
+# variable "path" {
+#   description = "folder path of web content"
+#   default = "./barista_cafe"
+# }
+
 module "infrastructure_instance" {
   source = "../module_infra"
 
@@ -34,3 +39,7 @@ module "infrastructure_instance" {
   region = "us-east-1"
 }
 
+output "load_balancer_dns_name" {
+  description = "DNS name of ALB"
+  value = module.infrastructure_instance.load_balancer_dns_name
+}
