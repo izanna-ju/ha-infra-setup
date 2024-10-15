@@ -20,8 +20,8 @@ locals {
 }
 
 variable "endpoint" {
-  type = string 
-  sensitive = true 
+  type      = string
+  sensitive = true
 }
 
 module "infrastructure_instance" {
@@ -30,11 +30,11 @@ module "infrastructure_instance" {
   # input variables
   bucket_name      = "izanna-web-bucket"
   environment_name = local.environment_name
-  endpoint = var.endpoint
-  region = "us-east-1"
+  endpoint         = var.endpoint
+  region           = "us-east-1"
 }
 
 output "load_balancer_dns_name" {
   description = "DNS name of ALB"
-  value = module.infrastructure_instance.load_balancer_dns_name
+  value       = module.infrastructure_instance.load_balancer_dns_name
 }

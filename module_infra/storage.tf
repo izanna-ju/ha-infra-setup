@@ -25,7 +25,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_crypto_con
 
 resource "aws_s3_object" "izanna_upload_object" {
   bucket                 = aws_s3_bucket.web_bucket.id
-  key                    = "barista_cafe_web"
+  key                    = "barista_cafe_web.zip"
   source                 = "./barista_cafe_web.zip"
   server_side_encryption = "AES256"
 
