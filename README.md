@@ -1,4 +1,5 @@
 # High Availabiliy Infrastructure Deployment Using Terraform and AWS
+![High Availability Architecture](_docs/assets/ha_infra_setup.png)
 
 ## Table of Contents
 - [Project Overview](#project-overview)
