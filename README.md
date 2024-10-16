@@ -184,6 +184,6 @@ sudo nginx -t
 ```
 sudo nginx -s reload
 ```
-6. Confirm every one work as expected by entering localhost on your browser of choice.
+6. Confirm the configuration work as expected by entering localhost on your browser of choice.
 
 ![Static Web page](_docs/assets/static_web.png)
