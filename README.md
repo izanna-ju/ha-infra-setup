@@ -9,9 +9,11 @@
 - [Inputs](#inputs)
 - [Outputs](#outputs)
 - [AWS Services Used](#aws-services-used)
+- [NGINX Configurations](#nginx-configurations)
 
 ## Project Overview
 This terraform configurations set up a high availability insfrastructure in AWS.
+An nginx server as a reverse proxy between the user and the AWS infrastructure.
 Services provisioned in aws are:
  - VPC with private and public subnets in two AZs.
  - Application Load Balancer (ALB) to distribute incoming traffics to target groups in different AZs.
@@ -21,10 +23,13 @@ Services provisioned in aws are:
 
 
 ## Prerequisites
-- Terraform (v1.9+) installed on your local machine
+- Terraform (v1.9+) installed on your local machine or virtual machine
 - AWS CLI installed and configured
 - SSH key pair to authenticate and test instance provisioning e.g (private-server.pem)
 - S3 bucket to store your static web page
+- nginx installed on your local machine or virtual machine
+
+
 
 ## Infrastructure Components
 1. **VPC and Networking**  
@@ -135,4 +140,47 @@ This project module is divided into:
     -  SNS Notification:
         Sends email alerts to the subscribers in the SNS topic.  * 
 
+## NGINX COnfigurations
 
+After set up your aws infrastructure and have retrieved the dns name of your load balancer, you can configure an nginx server to further protect your infra and act as a reverse proxy to your aws infra. 
+
+### Setup
+```
+sudo apt update && sudo apt install -y
+```
+### Configuration steps
+1. Open your terminal of choice and cd to /etc/nginx/sites-available directory.
+ Create a lb-reverse-proxy file in this location.
+```
+sudo nvim /etc/nginx/sites-available/lb-reverse-proxy
+```
+2. Add the following configuration in lb-reverse-proxy file
+```
+server {
+    listen 80;
+
+    server_name localhost;  # domain name or ip of your device or local host
+
+    location / {
+        proxy_pass <http://your-alb-dns-name>;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+3. Enable the configuration by creating a symbolic in the sites-enabled directory 
+
+```
+sudo ln -s /etc/nginx/sites-available/lb-reverse-proxy /etc/nginx/sites-enabled
+```
+4. Test your configuration for syntax error
+```
+sudo nginx -t
+```
+5. Reload your nginx service
+```
+sudo nginx -s reload
+```
+6. Confirm every one work as expected by entering localhost on your browser of choice.
