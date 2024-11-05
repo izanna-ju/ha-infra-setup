@@ -1,0 +1,4 @@
+.terraform
+backend.conf
+.terraform.lock.hcl
+terraform.tfstate*
