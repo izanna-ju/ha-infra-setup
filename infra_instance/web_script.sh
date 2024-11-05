@@ -19,7 +19,7 @@ systemctl start apache2.service
 sudo aws s3 cp s3://izanna-web-bucket/barista_cafe_web.zip .    
 sudo unzip barista_cafe_web.zip
 
-if [ -n "/var/www/html" ]; then 
+if [ -d "/var/www/html/" ]; then 
   sudo mv ~/2137_barista_cafe/* /var/www/html
   sudo rm -r *cafe*
 fi 
